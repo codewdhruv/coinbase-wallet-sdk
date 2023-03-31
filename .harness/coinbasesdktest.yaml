@@ -46,7 +46,9 @@ pipeline:
                   identifier: Install_NPM_dependencies
                   spec:
                     shell: Sh
-                    command: yarn install
+                    command: |-
+                      cd packages/wallet-sdk
+                      yarn install
                   when:
                     stageStatus: All
                   failureStrategies: []
@@ -92,4 +94,4 @@ pipeline:
                     stageStatus: All
                   failureStrategies: []
           sharedPaths:
-            - packages/wallet-sdk/
+            - packages/wallet-sdk
