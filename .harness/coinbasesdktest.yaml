@@ -92,4 +92,4 @@ pipeline:
                     stageStatus: All
                   failureStrategies: []
           sharedPaths:
-            - packages/wallet-sdk
+            - packages/wallet-sdk/
