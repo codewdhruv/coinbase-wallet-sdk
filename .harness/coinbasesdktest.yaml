@@ -85,3 +85,12 @@ pipeline:
                   when:
                     stageStatus: All
                   failureStrategies: []
+              - step:
+                  type: Run
+                  name: Run Unit Tests
+                  identifier: Run_Unit_Tests
+                  spec:
+                    shell: Sh
+                    command: |-
+                      cd packages/wallet-sdk
+                      yarn test:unit
