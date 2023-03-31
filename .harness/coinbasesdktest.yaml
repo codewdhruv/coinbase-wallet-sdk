@@ -26,21 +26,6 @@ pipeline:
           execution:
             steps:
               - step:
-                  type: Action
-                  name: Checkout
-                  identifier: Checkout
-                  spec:
-                    uses: actions/checkout@v3
-              - step:
-                  type: Action
-                  name: Checkout node action
-                  identifier: Checkout_node_action
-                  spec:
-                    uses: actions/setup-node@v3
-                    with:
-                      node-version-file: "'.nvmrc'"
-                      cache-dependency-path: "'**/yarn.lock'"
-              - step:
                   type: Run
                   name: Install NPM dependencies
                   identifier: Install_NPM_dependencies
@@ -58,7 +43,9 @@ pipeline:
                   identifier: Check_ESLint
                   spec:
                     shell: Sh
-                    command: yarn lint:eslint
+                    command: |-
+                      cd packages/wallet-sdk
+                      yarn lint:eslint
                   when:
                     stageStatus: All
                   failureStrategies: []
@@ -68,7 +55,9 @@ pipeline:
                   identifier: Check_prettier_formatting
                   spec:
                     shell: Sh
-                    command: yarn lint:prettier
+                    command: |-
+                      cd packages/wallet-sdk
+                      yarn lint:prettier
                   when:
                     stageStatus: All
                   failureStrategies: []
@@ -78,7 +67,9 @@ pipeline:
                   identifier: Runs_compile_asset_script
                   spec:
                     shell: Sh
-                    command: node ./compile-assets.js
+                    command: |-
+                      cd packages/wallet-sdk
+                      node ./compile-assets.js
                   when:
                     stageStatus: All
                   failureStrategies: []
@@ -89,6 +80,7 @@ pipeline:
                   spec:
                     shell: Sh
                     command: |
+                      cd packages/wallet-sdk
                       yarn lint:types
                   when:
                     stageStatus: All
