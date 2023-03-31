@@ -14,7 +14,6 @@ pipeline:
     - stage:
         name: lint-check
         identifier: lintcheck
-        description: ""
         type: CI
         spec:
           cloneCodebase: true
@@ -92,3 +91,5 @@ pipeline:
                   when:
                     stageStatus: All
                   failureStrategies: []
+          sharedPaths:
+            - ./packages/wallet-sdk
